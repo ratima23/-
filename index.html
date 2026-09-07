@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💥 กระทะแตก ครัวแหกสูตร | แหกทุกสูตร อร่อยทุกจาน</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandYellow: '#FFDE59',
+                        brandOrange: '#FF914D',
+                        brandRed: '#FF3131',
+                        brandDark: '#121212',
+                        brandCream: '#FFFDF9',
+                    },
+                    fontFamily: {
+                        sans: ['Kanit', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'comic': '4px 4px 0px #121212',
+                        'comic-lg': '8px 8px 0px #121212',
+                        'comic-sm': '2px 2px 0px #121212',
+                        'comic-orange': '4px 4px 0px #FF914D',
+                        'comic-red': '4px 4px 0px #FF3131',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts: Kanit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,300;0,400;0,600;0,700;0,900;1,400;1,700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Kanit', sans-serif;
+            background-color: #FFFDF9;
+            color: #121212;
+            overflow-x: hidden;
+        }
+        .comic-border {
+            border: 3px solid #121212;
+        }
+        .pop-dots {
+            background-image: radial-gradient(#121212 15%, transparent 16%);
+            background-size: 16px 16px;
+        }
+        .pop-dots-yellow {
+            background-image: radial-gradient(#FF914D 20%, transparent 21%);
+            background-size: 20px 20px;
+        }
+        @keyframes pulse-slow {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .animate-pulse-slow {
+            animation: pulse-slow 3s infinite ease-in-out;
+        }
+        @keyframes shake {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            20% { transform: translate(-3px, 3px) rotate(-2deg); }
+            40% { transform: translate(3px, -3px) rotate(2deg); }
+            60% { transform: translate(-2px, 1px) rotate(-1deg); }
+            80% { transform: translate(2px, -1px) rotate(1deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+        .animate-shake:hover {
+            animation: shake 0.5s infinite;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FFFDF9;
+            border-left: 3px solid #121212;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #FF914D;
+            border: 2px solid #121212;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-brandCream text-brandDark min-h-screen flex flex-col selection:bg-brandYellow selection:text-brandDark">
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-brandYellow comic-border border-b-4 shadow-comic">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Brand Logo -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="switchView('home')">
+                    <div class="w-12 h-12 bg-brandRed comic-border flex items-center justify-center text-white text-2xl font-black shadow-comic-sm transform -rotate-6">
+                        💥
+                    </div>
+                    <div>
+                        <span class="text-2xl sm:text-3xl font-black tracking-wider uppercase bg-brandBlack text-brandYellow px-2 py-0.5 comic-border shadow-comic-sm">กระทะแตก</span>
+                        <div class="text-xs font-bold text-brandDark tracking-widest mt-0.5">ครัวแหกสูตร 🍳</div>
+                    </div>
+                </div>
+
+                <!-- Desktop Nav Links -->
+                <nav class="hidden md:flex items-center space-x-6 font-bold text-lg">
+                    <button onclick="switchView('home')" id="nav-home" class="nav-btn px-3 py-1 bg-brandOrange text-white comic-border shadow-comic-sm transform hover:-translate-y-1 transition-all">หน้าแรก</button>
+                    <button onclick="switchView('menu')" id="nav-menu" class="nav-btn px-3 py-1 hover:bg-brandYellow comic-border shadow-comic-sm transform hover:-translate-y-1 transition-all">เมนูอาหาร</button>
+                    <button onclick="switchView('ai-haek')" id="nav-ai-haek" class="nav-btn px-3 py-1 bg-brandRed text-white comic-border shadow-comic-sm transform hover:-translate-y-1 transition-all">💥 AI แหกสูตร</button>
+                    <button onclick="switchView('game')" id="nav-game" class="nav-btn px-3 py-1 bg-emerald-400 text-brandDark comic-border shadow-comic-sm transform hover:-translate-y-1 transition-all animate-pulse">🎮 เกมจัดจาน</button>
+                    <button onclick="switchView('about')" id="nav-about" class="nav-btn px-3 py-1 hover:bg-brandYellow comic-border shadow-comic-sm transform hover:-translate-y-1 transition-all">เกี่ยวกับเรา</button>
+                </nav>
+
+                <!-- Cart & Mobile Toggle -->
+                <div class="flex items-center space-x-3">
+                    <button onclick="toggleCart()" class="relative bg-brandCream comic-border px-4 py-2 font-bold shadow-comic hover:bg-brandYellow transition-all flex items-center space-x-2">
+                        <i class="fa-solid fa-cart-shopping text-brandRed"></i>
+                        <span class="hidden sm:inline">ตะกร้า</span>
+                        <span id="cart-badge" class="absolute -top-2 -right-2 bg-brandRed text-white text-xs font-black w-6 h-6 rounded-full comic-border flex items-center justify-center">0</span>
+                    </button>
+                    <button onclick="toggleMobileMenu()" class="md:hidden bg-brandCream comic-border p-2 text-xl shadow-comic-sm">
+                        <i id="mobile-menu-icon" class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brandCream comic-border border-t-4 p-4 space-y-3 font-bold">
+            <button onclick="switchView('home'); toggleMobileMenu();" class="block w-full text-left px-4 py-2 bg-brandOrange text-white comic-border shadow-comic-sm">หน้าแรก</button>
+            <button onclick="switchView('menu'); toggleMobileMenu();" class="block w-full text-left px-4 py-2 hover:bg-brandYellow comic-border shadow-comic-sm">เมนูอาหาร</button>
+            <button onclick="switchView('ai-haek'); toggleMobileMenu();" class="block w-full text-left px-4 py-2 bg-brandRed text-white comic-border shadow-comic-sm">💥 AI แหกสูตร</button>
+            <button onclick="switchView('game'); toggleMobileMenu();" class="block w-full text-left px-4 py-2 bg-emerald-400 comic-border shadow-comic-sm">🎮 เกมจัดจาน (Plate It Right!)</button>
+            <button onclick="switchView('about'); toggleMobileMenu();" class="block w-full text-left px-4 py-2 hover:bg-brandYellow comic-border shadow-comic-sm">เกี่ยวกับเรา</button>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+
+        <!-- VIEW 1: HOME VIEW -->
+        <section id="view-home" class="view-section">
+            <!-- Hero Section -->
+            <div class="bg-brandYellow pop-dots border-b-4 border-brandDark py-12 lg:py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+                <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-7 space-y-6 z-10">
+                        <div class="inline-block bg-brandRed text-white font-black px-4 py-1 comic-border shadow-comic-sm transform -rotate-2 text-sm sm:text-base">
+                            🔥 แหกทุกสูตร อร่อยทุกจาน 💥
+                        </div>
+                        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black uppercase tracking-tight leading-none drop-shadow-[3px_3px_0px_#FFF]">
+                            กระทะแตก <br><span class="text-brandRed bg-brandYellow px-2 comic-border shadow-comic inline-block mt-2">ครัวแหกสูตร</span>
+                        </h1>
+                        <p class="text-lg sm:text-2xl font-bold bg-brandCream comic-border p-4 shadow-comic inline-block">
+                            “อาหารตามสั่งที่ไม่รู้จักคำว่าธรรมดา กะเพราพิซซ่า ไอศกรีมกะทิกะเพราหมูกรอบ... เราจัดให้หมด!”
+                        </p>
+                        <div class="flex flex-wrap gap-4 pt-4">
+                            <button onclick="switchView('menu')" class="bg-brandRed text-white font-black text-lg px-8 py-4 comic-border shadow-comic transform hover:-translate-y-1 transition-all flex items-center space-x-3">
+                                <span>🔴 ดูเมนูทั้งหมด</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                            <button onclick="switchView('ai-haek')" class="bg-brandOrange text-white font-black text-lg px-8 py-4 comic-border shadow-comic transform hover:-translate-y-1 transition-all flex items-center space-x-3">
+                                <span>🟡 วันนี้กินอะไรดี?</span>
+                                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Hero Dynamic Image Collage / Banner -->
+                    <div class="lg:col-span-5 relative flex justify-center">
+                        <div class="w-72 sm:w-96 h-72 sm:h-96 bg-brandOrange comic-border rounded-full p-4 shadow-comic-lg flex items-center justify-center relative animate-pulse-slow">
+                            <div class="absolute -top-4 -right-4 bg-brandRed text-white font-black px-4 py-2 comic-border shadow-comic-sm rotate-12 z-20">
+                                🌟 ลด 10% เล่นเกมเลย!
+                            </div>
+                            <img src="https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=600&q=80" alt="Krata Taek Signature" class="w-full h-full object-cover rounded-full comic-border shadow-comic">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Teaser Banner -->
+            <div class="bg-brandRed text-white py-8 px-4 border-b-4 border-brandDark">
+                <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 bg-brandDark comic-border p-6 shadow-comic-lg">
+                    <div class="space-y-2 text-center md:text-left">
+                        <span class="bg-brandYellow text-brandDark font-black text-xs px-2 py-1 comic-border">NEW FEATURE</span>
+                        <h2 class="text-3xl sm:text-4xl font-black text-brandYellow">“อร่อยก็ได้ สนุกก็มี!” 🎮</h2>
+                        <p class="text-brandCream font-bold text-lg">เล่นเกมจัดจาน (Plate It Right!) ระหว่างรออาหาร ยิ่งจัดเร็ว ยิ่งได้คะแนนสูง รับส่วนลดสูงสุด 20%!</p>
+                    </div>
+                    <button onclick="switchView('game')" class="bg-emerald-400 text-brandDark font-black text-xl px-8 py-4 comic-border shadow-comic hover:bg-emerald-300 transform hover:scale-105 transition-all">
+                        PLAY GAME NOW 🚀
+                    </button>
+                </div>
+            </div>
+
+            <!-- Featured Menu Section -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <div class="flex flex-col sm:flex-row items-center justify-between mb-10">
+                    <div>
+                        <span class="bg-brandOrange text-white font-bold px-3 py-1 comic-border text-sm">🔥 SIGNATURE DISHES</span>
+                        <h2 class="text-3xl sm:text-5xl font-black mt-2 uppercase">เมนูแหกกฎยอดฮิต</h2>
+                    </div>
+                    <button onclick="switchView('menu')" class="mt-4 sm:mt-0 font-bold underline text-lg hover:text-brandRed">ดูทั้งหมด 6 เมนู &rarr;</button>
+                </div>
+
+                <div id="home-menu-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Injected via JavaScript -->
+                </div>
+            </div>
+        </section>
+
+
+        <!-- VIEW 2: MENU VIEW -->
+        <section id="view-menu" class="view-section hidden">
+            <div class="bg-brandOrange py-12 px-4 sm:px-6 lg:px-8 border-b-4 border-brandDark">
+                <div class="max-w-7xl mx-auto text-center space-y-4">
+                    <span class="bg-brandYellow text-brandDark font-black px-4 py-1 comic-border text-sm">💥 FULL MENU CATALOG</span>
+                    <h1 class="text-4xl sm:text-6xl font-black uppercase text-white drop-shadow-[3px_3px_0px_#121212]">เมนูตามสั่งแหกสูตร</h1>
+                    <p class="text-lg font-bold bg-brandCream comic-border max-w-2xl mx-auto p-3 shadow-comic">
+                        เลือกเมนูที่ชอบ หรือใช้ช่องค้นหาด้านล่างเพื่อหาความฟินแบบจัดจ้าน!
+                    </p>
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+                <!-- Search & Filters -->
+                <div class="bg-brandCream comic-border p-6 shadow-comic mb-10 space-y-4">
+                    <div class="relative">
+                        <i class="fa-solid fa-magnifying-glass absolute left-4 top-4 text-xl text-gray-500"></i>
+                        <input type="text" id="search-input" oninput="filterMenus()" placeholder="ค้นหาเมนู เช่น หมูกรอบ / ชีส / เผ็ด / พิซซ่า..." class="w-full pl-12 pr-4 py-3 bg-white comic-border font-bold text-lg focus:outline-none focus:ring-2 focus:ring-brandRed">
+                    </div>
+                    <!-- Categories Horizontal Scroll -->
+                    <div class="flex space-x-3 overflow-x-auto pb-2 scrollbar-none">
+                        <button onclick="setCategory('all')" id="cat-all" class="cat-btn px-4 py-2 bg-brandDark text-white font-bold comic-border whitespace-nowrap shadow-comic-sm">ทั้งหมด 🌟</button>
+                        <button onclick="setCategory('rice')" id="cat-rice" class="cat-btn px-4 py-2 bg-white font-bold comic-border whitespace-nowrap shadow-comic-sm hover:bg-brandYellow">🍚 ข้าว</button>
+                        <button onclick="setCategory('noodle')" id="cat-noodle" class="cat-btn px-4 py-2 bg-white font-bold comic-border whitespace-nowrap shadow-comic-sm hover:bg-brandYellow">🍜 เส้น</button>
+                        <button onclick="setCategory('egg')" id="cat-egg" class="cat-btn px-4 py-2 bg-white font-bold comic-border whitespace-nowrap shadow-comic-sm hover:bg-brandYellow">🍳 เมนูไข่</button>
+                        <button onclick="setCategory('spicy')" id="cat-spicy" class="cat-btn px-4 py-2 bg-white font-bold comic-border whitespace-nowrap shadow-comic-sm hover:bg-brandYellow">🌶️ เมนูเผ็ด</button>
+                        <button onclick="setCategory('haek')" id="cat-haek" class="cat-btn px-4 py-2 bg-white font-bold comic-border whitespace-nowrap shadow-comic-sm hover:bg-brandYellow">💥 เมนูแหกสูตร</button>
+                    </div>
+                </div>
+
+                <!-- Product Grid -->
+                <div id="full-menu-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Injected via JavaScript -->
+                </div>
+            </div>
+        </section>
+
+
+        <!-- VIEW 3: AI HAEK SUT & RECOMMENDATION -->
+        <section id="view-ai-haek" class="view-section hidden">
+            <div class="bg-brandRed py-12 px-4 sm:px-6 lg:px-8 border-b-4 border-brandDark text-white">
+                <div class="max-w-4xl mx-auto text-center space-y-4">
+                    <span class="bg-brandYellow text-brandDark font-black px-4 py-1 comic-border text-sm">🤖 AI KITCHEN LAB</span>
+                    <h1 class="text-4xl sm:text-6xl font-black uppercase tracking-tight">💥 AI แหกสูตร</h1>
+                    <p class="text-lg font-bold bg-brandDark comic-border p-4 shadow-comic text-brandYellow">
+                        “มีอะไรในตู้เย็น? บอกมา เดี๋ยวเราแหกสูตรให้!” เลือกวัตถุดิบแล้วให้ AI จัดสรรความประหลาดให้คุณทันที
+                    </p>
+                </div>
+            </div>
+
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
+                <!-- Fridge Ingredient Selector Card -->
+                <div class="bg-brandCream comic-border p-6 sm:p-8 shadow-comic-lg space-y-6">
+                    <h2 class="text-2xl sm:text-3xl font-black flex items-center space-x-3">
+                        <i class="fa-solid fa-冷蔵庫 text-brandOrange"></i>
+                        <span>เลือกวัตถุดิบในตู้เย็นของคุณ (เลือกได้หลายอย่าง):</span>
+                    </h2>
+                    
+                    <div id="fridge-ingredients" class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                        <label class="ingredient-card bg-white comic-border p-4 flex items-center space-x-3 font-bold cursor-pointer hover:bg-brandYellow transition-all shadow-comic-sm">
+                            <input type="checkbox" value="หมูกรอบ" class="w-5 h-5 accent-brandRed">
+                            <span>🥩 หมูกรอบ</span>
+                        </label>
+                        <label class="ingredient-card bg-white comic-border p-4 flex items-center space-x-3 font-bold cursor-pointer hover:bg-brandYellow transition-all shadow-comic-sm">
+                            <input type="checkbox" value="ไข่เป็ด/ไข่ไก่" class="w-5 h-5 accent-brandRed">
+                            <span>🍳 ไข่</span>
+                        </label>
+                        <label class="ingredient-card bg-white comic-border p-4 flex items-center space-x-3 font-bold cursor-pointer hover:bg-brandYellow transition-all shadow-comic-sm">
+                            <input type="checkbox" value="มอสซาเรลล่าชีส" class="w-5 h-5 accent-brandRed">
+                            <span>🧀 ชีส</span>
+                        </label>
+                        <label class="ingredient-card bg-white comic-border p-4 flex items-center space-x-3 font-bold cursor-pointer hover:bg-brandYellow transition-all shadow-comic-sm">
+                            <input type="checkbox" value="เส้นมาม่า" class="w-5 h-5 accent-brandRed">
+                            <span>🍜 มาม่า</span>
+                        </label>
+                        <label class="ingredient-card bg-white comic-border p-4 flex items-center space-x-3 font-bold cursor-pointer hover:bg-brandYellow transition-all shadow-comic-sm">
+                            <input type="checkbox" value="ซอสชาไทย" class="w-5 h-5 accent-brandRed">
+                            <span>🧋 ชาไทย</span>
+                        </label>
+                        <label class="ingredient-card bg-white comic-border p-4 flex items-center space-x-3 font-bold cursor-pointer hover:bg-brandYellow transition-all shadow-comic-sm">
+                            <input type="checkbox" value="ไอศกรีมกะทิ" class="w-5 h-5 accent-brandRed">
+                            <span>🥥 ไอศกรีมกะทิ</span>
+                        </label>
+                        <label class="ingredient-card bg-white comic-border p-4 flex items-center space-x-3 font-bold cursor-pointer hover:bg-brandYellow transition-all shadow-comic-sm">
+                            <input type="checkbox" value="ซอสคาราเมล" class="w-5 h-5 accent-brandRed">
+                            <span>🍮 คาราเมล</span>
+                        </label>
+                        <label class="ingredient-card bg-white comic-border p-4 flex items-center space-x-3 font-bold cursor-pointer hover:bg-brandYellow transition-all shadow-comic-sm">
+                            <input type="checkbox" value="ใบกะเพราป่า" class="w-5 h-5 accent-brandRed">
+                            <span>🌿 ใบกะเพรา</span>
+                        </label>
+                    </div>
+
+                    <div class="text-center pt-4">
+                        <button onclick="runAiHaekSut()" class="bg-brandRed text-white font-black text-xl px-10 py-4 comic-border shadow-comic hover:bg-red-600 transform hover:scale-105 transition-all">
+                            💥 แหกสูตรเลย!
+                        </button>
+                    </div>
+                </div>
+
+                <!-- AI Generation Result Area -->
+                <div id="ai-result-container" class="hidden bg-brandYellow comic-border p-6 sm:p-8 shadow-comic-lg space-y-6">
+                    <div class="text-center">
+                        <span id="ai-status-text" class="bg-brandDark text-white font-black px-4 py-1 comic-border text-sm uppercase">🔥 เมนูพร้อมแล้ว!</span>
+                    </div>
+                    <div id="ai-recipe-content" class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center bg-white comic-border p-6 shadow-comic">
+                        <!-- Dynamic generated recipe content -->
+                    </div>
+                </div>
+
+                <!-- AI Recommendation Wizard: "วันนี้กินอะไรดี?" -->
+                <div class="bg-brandOrange comic-border p-6 sm:p-8 shadow-comic-lg text-white space-y-6">
+                    <div class="text-center space-y-2">
+                        <span class="bg-brandYellow text-brandDark font-black px-3 py-1 comic-border text-sm">🤔 DECISION HELPER</span>
+                        <h2 class="text-3xl font-black uppercase">“วันนี้กินอะไรดี?”</h2>
+                        <p class="font-bold">บอกความต้องการของคุณ แล้ว AI จะเลือกเมนูที่ตรงใจที่สุด 3 รายการ!</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 bg-brandDark comic-border p-6">
+                        <div>
+                            <label class="block font-bold mb-2 text-brandYellow">💵 งบประมาณ:</label>
+                            <select id="rec-budget" class="w-full p-3 bg-white text-brandDark font-bold comic-border">
+                                <option value="50">50 บาท</option>
+                                <option value="90" selected>80-90 บาท</option>
+                                <option value="120">100-120 บาท</option>
+                                <option value="200">150+ บาท (จัดเต็ม)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block font-bold mb-2 text-brandYellow">🍲 ประเภทอาหาร:</label>
+                            <select id="rec-type" class="w-full p-3 bg-white text-brandDark font-bold comic-border">
+                                <option value="all">ไม่จำกัด (อะไรก็ได้)</option>
+                                <option value="rice">ข้าว</option>
+                                <option value="noodle">เส้น</option>
+                                <option value="fusion">ฟิวชันแปลกๆ</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block font-bold mb-2 text-brandYellow">🤪 อารมณ์วันนี้:</label>
+                            <select id="rec-mood" class="w-full p-3 bg-white text-brandDark font-bold comic-border">
+                                <option value="delicious">😋 อยากอร่อยฟินๆ</option>
+                                <option value="spicy">🔥 อยากเผ็ดร้อนจัดจ้าน</option>
+                                <option value="weird">🤯 อยากลองของแปลกหลุดโลก</option>
+                                <option value="healthy">💚 อยากสุขภาพ (แต่อยากอร่อย)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <button onclick="runAiRecommendation()" class="bg-brandYellow text-brandDark font-black text-lg px-8 py-3 comic-border shadow-comic hover:bg-yellow-300 transform hover:scale-105 transition-all">
+                            ✨ ให้ AI แนะนำด่วน!
+                        </button>
+                    </div>
+
+                    <div id="ai-recommendation-results" class="hidden grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+                        <!-- Recommendation results injected here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- VIEW 4: GAME VIEW (“PLATE IT RIGHT!”) -->
+        <section id="view-game" class="view-section hidden">
+            <div class="bg-emerald-500 py-12 px-4 sm:px-6 lg:px-8 border-b-4 border-brandDark text-brandDark">
+                <div class="max-w-4xl mx-auto text-center space-y-4">
+                    <span class="bg-brandYellow font-black px-4 py-1 comic-border text-sm">🎮 MINI GAME CHALLENGE</span>
+                    <h1 class="text-4xl sm:text-6xl font-black uppercase tracking-tight">🍽️ PLATE IT RIGHT!</h1>
+                    <p class="text-lg font-bold bg-brandCream comic-border p-4 shadow-comic">
+                        “จัดอาหารให้ตรงตามโจทย์ ก่อนหมดเวลา! ยิ่งเร็ว ยิ่งได้คะแนนสูงสะสมแลกส่วนลดฟรี!”
+                    </p>
+                </div>
+            </div>
+
+            <!-- Game Container -->
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+                <!-- Game Start Screen -->
+                <div id="game-start-screen" class="bg-brandCream comic-border p-8 text-center space-y-6 shadow-comic-lg">
+                    <div class="w-32 h-32 bg-brandYellow comic-border rounded-full mx-auto flex items-center justify-center text-6xl shadow-comic animate-bounce">
+                        🍳
+                    </div>
+                    <h2 class="text-3xl sm:text-5xl font-black">กติกาการเล่นเกมจัดจาน</h2>
+                    <div class="max-w-md mx-auto text-left bg-white comic-border p-6 shadow-comic space-y-3 font-bold text-lg">
+                        <p>1. ลากหรือแตะวัตถุดิบจาก Kitchen ไปวางบน Plate ให้ตรงโจทย์</p>
+                        <p>2. จัดถูกต้อง <span class="text-emerald-600">+100 คะแนน</span> | วางผิด <span class="text-brandRed">-30 คะแนน</span></p>
+                        <p>3. ทำคอมโบ (Combo) ต่อเนื่องเพื่อรับโบนัสพิเศษ!</p>
+                        <p>4. ผ่านครบ 5 Level เพื่อปลดล็อกคูปองสูงสุด 20%!</p>
+                    </div>
+                    <button onclick="startGame()" class="bg-brandRed text-white font-black text-2xl px-12 py-5 comic-border shadow-comic hover:bg-red-600 transform hover:scale-105 transition-all">
+                        START GAME 🚀
+                    </button>
+                </div>
+
+                <!-- Active Gameplay Screen -->
+                <div id="game-play-screen" class="hidden space-y-6">
+                    <!-- Top HUD -->
+                    <div class="bg-brandDark text-brandYellow comic-border p-4 flex flex-wrap items-center justify-between font-black text-lg sm:text-xl shadow-comic">
+                        <div>LEVEL: <span id="game-level" class="text-white">1</span> / 5</div>
+                        <div>SCORE: <span id="game-score" class="text-white">0</span></div>
+                        <div class="bg-brandRed text-white px-3 py-1 comic-border">TIME: <span id="game-timer">30</span>s</div>
+                        <div>COMBO: <span id="game-combo" class="text-emerald-400">x1</span></div>
+                    </div>
+
+                    <!-- Customer Order Box -->
+                    <div class="bg-brandYellow comic-border p-4 shadow-comic text-center space-y-2">
+                        <h3 class="font-black text-xl uppercase">📋 CUSTOMER ORDER (สิ่งที่ลูกค้าต้องการ):</h3>
+                        <div id="order-items-display" class="flex flex-wrap justify-center gap-3">
+                            <!-- Injected order items -->
+                        </div>
+                    </div>
+
+                    <!-- Main Cooking & Plating Arena -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Plate Area (Drop Zone) -->
+                        <div class="bg-brandCream comic-border p-6 shadow-comic flex flex-col items-center justify-center min-h-[320px] relative pop-dots">
+                            <div class="absolute top-4 left-4 bg-brandDark text-white font-bold text-xs px-2 py-1 comic-border">PLATE (จานอาหาร)</div>
+                            
+                            <!-- Large Dish Plate -->
+                            <div id="plate-drop-zone" ondragover="allowDrop(event)" ondrop="dropItem(event)" class="w-64 h-64 sm:w-72 sm:h-72 rounded-full border-8 border-dashed border-brandDark bg-white shadow-comic-lg flex flex-wrap items-center justify-center p-4 gap-3 relative transition-all">
+                                <span id="plate-placeholder-text" class="text-gray-400 font-bold text-center">ลากวัตถุดิบมาวางที่นี่</span>
+                            </div>
+                        </div>
+
+                        <!-- Kitchen Area (Source Items) -->
+                        <div class="bg-brandOrange comic-border p-6 shadow-comic flex flex-col justify-between space-y-4">
+                            <div class="flex justify-between items-center">
+                                <h3 class="font-black text-white text-xl uppercase">🍳 KITCHEN (วัตถุดิบ)</h3>
+                                <span class="text-xs bg-brandDark text-white font-bold px-2 py-1 comic-border">ลากหรือคลิกเพื่อจัดจาน</span>
+                            </div>
+                            
+                            <div id="kitchen-items-tray" class="grid grid-cols-3 sm:grid-cols-4 gap-3">
+                                <!-- Kitchen food items with drag start -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game Over / Result Screen -->
+                <div id="game-over-screen" class="hidden bg-brandCream comic-border p-8 text-center space-y-6 shadow-comic-lg">
+                    <div class="text-5xl font-black" id="game-result-title">🎉 GREAT JOB!</div>
+                    <div class="max-w-md mx-auto bg-white comic-border p-6 space-y-4 font-bold text-lg shadow-comic">
+                        <div class="flex justify-between border-b-2 pb-2">
+                            <span>Total Score:</span>
+                            <span id="res-score" class="text-brandRed text-2xl font-black">1,250</span>
+                        </div>
+                        <div class="flex justify-between border-b-2 pb-2">
+                            <span>Dishes Completed:</span>
+                            <span id="res-dishes">5</span>
+                        </div>
+                        <div class="flex justify-between border-b-2 pb-2">
+                            <span>Rating:</span>
+                            <span id="res-stars" class="text-yellow-500 text-xl">⭐⭐⭐ PERFECT CHEF</span>
+                        </div>
+                        <!-- Reward Coupon Section -->
+                        <div id="reward-unlock-box" class="bg-brandYellow comic-border p-4 space-y-2 hidden">
+                            <div class="text-brandRed font-black text-xl">🎁 CONGRATULATIONS!</div>
+                            <div id="reward-text" class="font-bold text-sm">คุณได้รับส่วนลด 10% จากการเล่นเกม</div>
+                            <button onclick="claimReward()" class="bg-brandRed text-white font-black px-6 py-2 comic-border shadow-comic-sm hover:bg-red-600">
+                                CLAIM REWARD & APPLY 🎟️
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex justify-center space-x-4">
+                        <button onclick="startGame()" class="bg-brandOrange text-white font-black px-6 py-3 comic-border shadow-comic">
+                            PLAY AGAIN 🔄
+                        </button>
+                        <button onclick="switchView('menu')" class="bg-brandDark text-brandYellow font-black px-6 py-3 comic-border shadow-comic">
+                            ไปสั่งอาหารเลย 🍜
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- VIEW 5: ABOUT VIEW -->
+        <section id="view-about" class="view-section hidden">
+            <div class="bg-brandYellow py-12 px-4 sm:px-6 lg:px-8 border-b-4 border-brandDark text-brandDark">
+                <div class="max-w-4xl mx-auto text-center space-y-4">
+                    <span class="bg-brandRed text-white font-black px-4 py-1 comic-border text-sm">📖 OUR MANIFESTO</span>
+                    <h1 class="text-4xl sm:text-6xl font-black uppercase tracking-tight">ทำไมต้องกระทะแตก?</h1>
+                </div>
+            </div>
+
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-10">
+                <div class="bg-brandCream comic-border p-8 sm:p-12 shadow-comic-lg space-y-6 text-lg sm:text-xl font-bold leading-relaxed">
+                    <p>
+                        “เพราะเราเชื่อว่าอาหารตามสั่งไม่จำเป็นต้องอยู่ในกรอบเดิม ๆ กะเพราไม่จำเป็นต้องอยู่กับข้าว มาม่าไม่จำเป็นต้องอยู่ในชาม และชีสก็พร้อมจะไปอยู่กับทุกอย่าง!”
+                    </p>
+                    <p>
+                        เราเลยเปิดครัวให้ทุกสูตรถูกแหกได้ตามใจชอบ ผสมผสานความเป็น Thai Street Food เข้ากับความสนุกสนานสไตล์ Pop Art และ Gen Z ขี้เล่น จัดจ้าน และกล้าทดลองสิ่งใหม่ๆ
+                    </p>
+                    <div class="bg-brandDark text-brandYellow comic-border p-6 text-center text-2xl font-black shadow-comic">
+                        “แหกทุกสูตร อร่อยทุกจาน 💥”
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                    <div class="bg-white comic-border p-6 shadow-comic space-y-3">
+                        <div class="text-4xl">🍳</div>
+                        <h3 class="font-black text-xl">วัตถุดิบพรีเมียม</h3>
+                        <p class="text-sm text-gray-600 font-bold">คัดหมูกรอบชิ้นโต ชีสยืดสะใจ และเครื่องเทศสดใหม่ทุกวัน</p>
+                    </div>
+                    <div class="bg-white comic-border p-6 shadow-comic space-y-3">
+                        <div class="text-4xl">🤖</div>
+                        <h3 class="font-black text-xl">AI Kitchen Lab</h3>
+                        <p class="text-sm text-gray-600 font-bold">คิดค้นเมนูแปลกใหม่ด้วยระบบ AI สุดกวนที่เดียวในไทย</p>
+                    </div>
+                    <div class="bg-white comic-border p-6 shadow-comic space-y-3">
+                        <div class="text-4xl">🎮</div>
+                        <h3 class="font-black text-xl">เล่นเกมรับส่วนลด</h3>
+                        <p class="text-sm text-gray-600 font-bold">สนุกกับเกมจัดจานระหว่างรออาหาร รับคูปองลดราคาทันที</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- PRODUCT DETAIL MODAL -->
+    <div id="product-modal" class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden flex items-center justify-center p-4">
+        <div id="modal-content" class="bg-brandCream comic-border max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-comic-lg p-6 sm:p-8 space-y-6 relative">
+            <button onclick="closeProductModal()" class="absolute top-4 right-4 bg-brandRed text-white w-10 h-10 comic-border font-black text-xl flex items-center justify-center shadow-comic-sm hover:scale-110 transition-all">
+                &times;
+            </button>
+            <div id="modal-body-content">
+                <!-- Injected via JavaScript -->
+            </div>
+        </div>
+    </div>
+
+
+    <!-- CART SLIDE-OVER DRAWER -->
+    <div id="cart-drawer" class="fixed inset-0 z-50 hidden flex justify-end bg-black bg-opacity-60 transition-opacity">
+        <div class="bg-brandCream w-full max-w-md h-full comic-border border-l-4 flex flex-col justify-between shadow-comic-lg p-6 overflow-y-auto">
+            <div class="space-y-6">
+                <div class="flex items-center justify-between border-b-4 border-brandDark pb-4">
+                    <h2 class="text-2xl font-black uppercase flex items-center space-x-2">
+                        <i class="fa-solid fa-cart-shopping text-brandRed"></i>
+                        <span>ตะกร้าความอร่อย</span>
+                    </h2>
+                    <button onclick="toggleCart()" class="bg-brandDark text-white w-8 h-8 font-bold comic-border">&times;</button>
+                </div>
+
+                <!-- Cart Items List -->
+                <div id="cart-items-container" class="space-y-4 max-h-[50vh] overflow-y-auto pr-2">
+                    <!-- Injected items -->
+                </div>
+
+                <!-- Coupon Section -->
+                <div class="bg-white comic-border p-4 space-y-2 shadow-comic-sm">
+                    <label class="font-bold text-sm block">🎟️ รหัสส่วนลด / คูปองจากเกม:</label>
+                    <div class="flex space-x-2">
+                        <input type="text" id="coupon-input" placeholder="ใส่รหัสส่วนลด..." class="flex-grow p-2 comic-border font-bold uppercase">
+                        <button onclick="applyCoupon()" class="bg-brandOrange text-white px-4 font-black comic-border shadow-comic-sm">ใช้</button>
+                    </div>
+                    <div id="applied-coupon-msg" class="text-xs font-bold text-emerald-600 hidden"></div>
+                </div>
+            </div>
+
+            <!-- Cart Footer Summary -->
+            <div class="border-t-4 border-brandDark pt-4 space-y-4">
+                <div class="space-y-2 font-bold">
+                    <div class="flex justify-between">
+                        <span>ยอดรวมสินค้า:</span>
+                        <span id="cart-subtotal">0 บาท</span>
+                    </div>
+                    <div id="discount-row" class="flex justify-between text-brandRed hidden">
+                        <span>ส่วนลดคูปอง:</span>
+                        <span id="cart-discount">-0 บาท</span>
+                    </div>
+                    <div class="flex justify-between text-xl font-black">
+                        <span>สุทธิ:</span>
+                        <span id="cart-total" class="text-brandRed">0 บาท</span>
+                    </div>
+                </div>
+                <button onclick="checkoutOrder()" class="w-full bg-brandRed text-white font-black text-xl py-4 comic-border shadow-comic hover:bg-red-600 transform hover:scale-[1.02] transition-all">
+                    💥 สั่งเลย!
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ORDER STATUS MODAL -->
+    <div id="order-status-modal" class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-brandCream comic-border max-w-md w-full p-8 text-center space-y-6 shadow-comic-lg">
+            <div class="w-20 h-20 bg-brandYellow comic-border rounded-full mx-auto flex items-center justify-center text-4xl animate-bounce">
+                👨‍🍳
+            </div>
+            <h3 class="text-2xl font-black uppercase">สถานะคำสั่งซื้อ</h3>
+            <div id="order-status-steps" class="space-y-3 font-bold text-left bg-white comic-border p-4 shadow-comic">
+                <div class="step-item text-brandRed">👨‍🍳 กำลังเตรียมวัตถุดิบ...</div>
+                <div class="step-item text-gray-400">🔥 กำลังผัดด้วยไฟแรง...</div>
+                <div class="step-item text-gray-400">🍳 กำลังปรุงรสชาติจัดจ้าน...</div>
+                <div class="step-item text-gray-400">💥 ใกล้ระเบิดความอร่อยแล้ว!</div>
+                <div class="step-item text-gray-400">✅ พร้อมเสิร์ฟความฟิน!</div>
+            </div>
+            <button onclick="closeOrderStatus()" class="bg-brandDark text-brandYellow font-black px-8 py-3 comic-border shadow-comic">
+                รับทราบ ลุยต่อเลย! 🚀
+            </button>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="bg-brandDark text-brandCream border-t-4 border-brandDark py-12 px-4 sm:px-6 lg:px-8 mt-auto">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="space-y-4">
+                <div class="flex items-center space-x-3">
+                    <span class="text-2xl font-black bg-brandRed text-white px-3 py-1 comic-border">💥 กระทะแตก</span>
+                </div>
+                <p class="font-bold text-sm text-gray-300">
+                    “แหกทุกสูตร อร่อยทุกจาน” อาหารตามสั่งแนวใหม่ หลุดโลกแต่ฟินจริง!
+                </p>
+            </div>
+            <div class="space-y-2 font-bold">
+                <h4 class="text-brandYellow font-black uppercase text-lg">เมนูด่วน</h4>
+                <p class="cursor-pointer hover:text-brandYellow" onclick="switchView('menu')">เมนูทั้งหมด</p>
+                <p class="cursor-pointer hover:text-brandYellow" onclick="switchView('ai-haek')">💥 AI แหกสูตร</p>
+                <p class="cursor-pointer hover:text-brandYellow" onclick="switchView('game')">🎮 เกมจัดจาน</p>
+            </div>
+            <div class="space-y-2 font-bold">
+                <h4 class="text-brandYellow font-black uppercase text-lg">ติดต่อเรา</h4>
+                <p>📍 สาขาครัวทะลุจักรวาล กรุงเทพฯ</p>
+                <p>📞 โทร: 088-HAEK-SUT</p>
+                <p>💬 Line: @krataetaek</p>
+            </div>
+            <div class="space-y-2 font-bold">
+                <h4 class="text-brandYellow font-black uppercase text-lg">Social Media</h4>
+                <div class="flex space-x-4 text-2xl pt-2">
+                    <a href="#" class="hover:text-brandYellow"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" class="hover:text-brandYellow"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="#" class="hover:text-brandYellow"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="hover:text-brandYellow"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-8 pt-8 border-t border-gray-800 text-center text-xs font-bold text-gray-500">
+            © 2026 กระทะแตก ครัวแหกสูตร All rights reserved. Pop Art & Comic Thai Street Food Experience.
+        </div>
+    </footer>
+
+
+    <script>
+        // Menu Data Mapping exactly as requested
+        const menuProducts = [
+            {
+                id: 1,
+                name: "กะเพราพิซซ่าแตก",
+                category: "haek",
+                price: 99,
+                calories: 560,
+                protein: "28g",
+                carbs: "62g",
+                fat: "22g",
+                spicy: 2,
+                desc: "พิซซ่าสไตล์ Thai Fusion แป้งบางกรอบ หน้ากะเพราหมูสับ ชีสยืดละลายสะใจ",
+                image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80",
+                ingredients: ["แป้งพิซซ่าบางกรอบ", "หมูสับผัดพริกกระเพรา", "มอสซาเรลล่าชีส", "ใบกะเพรากรอบ", "พริกแดง"],
+                allergen: "แป้งสาลี, ผลิตภัณฑ์จากนม (ชีส)"
+            },
+            {
+                id: 2,
+                name: "มาม่าคาร์โบนาร่ากะเพรา",
+                category: "noodle",
+                price: 89,
+                calories: 560,
+                protein: "24g",
+                carbs: "58g",
+                fat: "26g",
+                spicy: 2,
+                desc: "เส้นมาม่าเหนียวนุ่มคลุกเคล้าซอสคาร์โบนาร่าครีมมี่เข้มข้น โปะหมูกรอบชิ้นใหญ่และไข่แดงกึ่งสุก",
+                image: "https://images.unsplash.com/photo-1612874742237-6526221588e3?auto=format&fit=crop&w=600&q=80",
+                ingredients: ["เส้นมาม่า", "ซอสคาร์โบนาร่าเข้มข้น", "หมูกรอบ", "ไข่แดง", "ใบกะเพรา"],
+                allergen: "กลูเตน, ไข่, นม"
+            },
+            {
+                id: 3,
+                name: "ไข่ข้นต้มยำชีสระเบิด",
+                category: "egg",
+                price: 89,
+                calories: 610,
+                protein: "26g",
+                carbs: "65g",
+                fat: "28g",
+                spicy: 3,
+                desc: "ข้าวสวยร้อนๆ โปะด้วยไข่ข้นเนื้อนุ่มเยิ้ม ราดซอสต้มยำรสแซ่บและชีสเบิร์นไฟสีทอง",
+                image: "https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=600&q=80",
+                ingredients: ["ข้าวสวย", "ไข่ข้น", "ซอสต้มยำเข้มข้น", "มอสซาเรลล่าชีส", "หมูกรอบ", "ใบมะกรูด"],
+                allergen: "ไข่, นม, อาหารทะเล (น้ำพรมเผ็ด)"
+            },
+            {
+                id: 4,
+                name: "ข้าวไก่กรอบซอสชาไทย",
+                category: "rice",
+                price: 89,
+                calories: 650,
+                protein: "32g",
+                carbs: "70g",
+                fat: "24g",
+                spicy: 2,
+                desc: "ไก่ทอดกรอบสีทองชิ้นใหญ่ ราดซอสชาไทยสูตรพิเศษ หอมหวานมันกลมกล่อม",
+                image: "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=600&q=80",
+                ingredients: ["ข้าวสวย", "ไก่ทอดกรอบ", "ซอสชาไทยเคี่ยวพิเศษ", "พริกแดง", "หอมใหญ่"],
+                allergen: "แป้งสาลี, ถั่ว (ชาไทย)"
+            },
+            {
+                id: 5,
+                name: "สปาเกตตีกะเพราคาราเมล",
+                category: "haek",
+                price: 109,
+                calories: 620,
+                protein: "26g",
+                carbs: "70g",
+                fat: "24g",
+                spicy: 2,
+                desc: "สปาเกตตีผัดซอสกระเพราจัดจ้าน ตัดเลี่ยนด้วยซอสคาราเมลหวานเค็มเงางามและหมูกรอบ",
+                image: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=600&q=80",
+                ingredients: ["เส้นสปาเกตตี", "ซอสกระเพรา", "หมูกรอบ", "ซอสคาราเมล", "ใบกะเพรากรอบ"],
+                allergen: "กลูเตน"
+            },
+            {
+                id: 6,
+                name: "กะเพราไอศกรีมกะทิ",
+                category: "haek",
+                price: 129,
+                calories: 580,
+                protein: "22g",
+                carbs: "55g",
+                fat: "30g",
+                spicy: 2,
+                desc: "ซิกเนเจอร์สะเทือนวงการ! กะเพราหมูกรอบรสเผ็ดร้อน ท็อปด้วยไอศกรีมกะทิเย็นฉ่ำ ตัดกันอย่างลงตัว",
+                image: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=600&q=80",
+                ingredients: ["ข้าวสวย", "กะเพราหมูกรอบ", "ไอศกรีมกะทิสด", "ใบกะเพรากรอบ", "พริกทอด"],
+                allergen: "ผลิตภัณฑ์จากมะพร้าว"
+            }
+        ];
+
+        let cart = [];
+        let discountPercent = 0;
+
+        // Initialize application on load
+        window.onload = function() {
+            renderHomeMenus();
+            renderFullMenu(menuProducts);
+        };
+
+        // Navigation Switcher
+        function switchView(viewId) {
+            document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`view-${viewId}`).classList.remove('hidden');
+            
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('bg-brandOrange', 'text-white'));
+            const activeBtn = document.getElementById(`nav-${viewId}`);
+            if(activeBtn) {
+                activeBtn.classList.add('bg-brandOrange', 'text-white');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Render Home Menus
+        function renderHomeMenus() {
+            const container = document.getElementById('home-menu-grid');
+            if(!container) return;
+            container.innerHTML = menuProducts.slice(0, 3).map(product => createProductCardHTML(product)).join('');
+        }
+
+        // Render Full Menu Grid
+        function renderFullMenu(products) {
+            const container = document.getElementById('full-menu-grid');
+            if(!container) return;
+            if(products.length === 0) {
+                container.innerHTML = `<div class="col-span-full text-center py-12 font-bold text-2xl text-gray-500">ไม่พบเมนูที่คุณค้นหา... ลองค้นคำอื่นดูนะ! 💥</div>`;
+                return;
+            }
+            container.innerHTML = products.map(product => createProductCardHTML(product)).join('');
+        }
+
+        function createProductCardHTML(product) {
+            let spicyStars = '🌶️'.repeat(product.spicy);
+            return `
+                <div class="bg-white comic-border shadow-comic flex flex-col justify-between overflow-hidden transform hover:-translate-y-2 transition-all group">
+                    <div class="relative overflow-hidden h-56 bg-gray-100 border-b-3 border-brandDark">
+                        <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/FF914D/FFF?text=Krata+Taek'">
+                        <div class="absolute top-3 right-3 bg-brandRed text-white font-black px-3 py-1 comic-border shadow-comic-sm">
+                            ${product.price} ฿
+                        </div>
+                        <div class="absolute bottom-3 left-3 bg-brandYellow text-brandDark font-bold px-2 py-0.5 text-xs comic-border">
+                            ${product.calories} kcal | ${product.protein} Protein
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-4 flex-grow flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between">
+                                <h3 class="text-2xl font-black">${product.name}</h3>
+                                <span class="text-sm" title="ความเผ็ด">${spicyStars}</span>
+                            </div>
+                            <p class="text-gray-700 font-bold text-sm mt-2 line-clamp-2">${product.desc}</p>
+                        </div>
+                        <div class="flex space-x-2 pt-2">
+                            <button onclick="openProductDetail(${product.id})" class="flex-grow bg-brandDark text-brandYellow font-black py-2 comic-border shadow-comic-sm hover:bg-black transition-all">
+                                ดูรายละเอียด
+                            </button>
+                            <button onclick="quickAddToCart(${product.id})" class="bg-brandRed text-white px-4 font-black comic-border shadow-comic-sm hover:bg-red-600 transition-all">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Filter Menus
+        function filterMenus() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            const filtered = menuProducts.filter(p => 
+                p.name.toLowerCase().includes(query) || 
+                p.desc.toLowerCase().includes(query) ||
+                p.ingredients.some(i => i.toLowerCase().includes(query))
+            );
+            renderFullMenu(filtered);
+        }
+
+        function setCategory(cat) {
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.classList.remove('bg-brandDark', 'text-white');
+                btn.classList.add('bg-white');
+            });
+            event.target.classList.remove('bg-white');
+            event.target.classList.add('bg-brandDark', 'text-white');
+
+            if(cat === 'all') {
+                renderFullMenu(menuProducts);
+            } else {
+                const filtered = menuProducts.filter(p => p.category === cat);
+                renderFullMenu(filtered);
+            }
+        }
+
+        // Product Detail Modal & Customizer
+        let currentModalProduct = null;
+        let selectedCustomizations = {
+            extraEgg: false,
+            extraMeat: false,
+            extraCheese: false,
+            lessSpice: false,
+            noVeg: false
+        };
+
+        function openProductDetail(productId) {
+            const product = menuProducts.find(p => p.id === productId);
+            if(!product) return;
+            currentModalProduct = product;
+            selectedCustomizations = { extraEgg: false, extraMeat: false, extraCheese: false, lessSpice: false, noVeg: false };
+
+            const modalBody = document.getElementById('modal-body-content');
+            modalBody.innerHTML = `
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                    <div class="h-64 sm:h-80 comic-border overflow-hidden">
+                        <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover">
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <h2 class="text-3xl font-black">${product.name}</h2>
+                            <span class="text-2xl font-black text-brandRed" id="modal-price">${product.price} ฿</span>
+                        </div>
+                        <p class="font-bold text-gray-700">${product.desc}</p>
+                        
+                        <!-- Health Info -->
+                        <div class="bg-white comic-border p-3 space-y-1 text-sm font-bold">
+                            <div class="text-brandRed font-black">❤️ ข้อมูลสุขภาพ (ประมาณ):</div>
+                            <div class="grid grid-cols-2 gap-2">
+                                <div>🔥 Calories: ${product.calories} kcal</div>
+                                <div>💪 Protein: ${product.protein}</div>
+                                <div>🍞 Carbs: ${product.carbs}</div>
+                                <div>🧈 Fat: ${product.fat}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ingredients Tags -->
+                <div class="space-y-2 pt-2">
+                    <h4 class="font-black">🥘 ส่วนผสมหลัก:</h4>
+                    <div class="flex flex-wrap gap-2">
+                        ${product.ingredients.map(i => `<span class="bg-brandYellow px-3 py-1 font-bold text-sm comic-border shadow-comic-sm">${i}</span>`).join('')}
+                    </div>
+                </div>
+
+                <!-- Customizer Options -->
+                <div class="bg-white comic-border p-4 space-y-3">
+                    <h4 class="font-black text-brandRed">⚙️ ปรับแต่งความฟิน (Customize):</h4>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 font-bold text-sm">
+                        <label class="flex items-center space-x-2 cursor-pointer"><input type="checkbox" onchange="updateCustomization('extraEgg', this.checked)" class="w-4 h-4 accent-brandRed"> <span>เพิ่มไข่ (+15฿)</span></label>
+                        <label class="flex items-center space-x-2 cursor-pointer"><input type="checkbox" onchange="updateCustomization('extraMeat', this.checked)" class="w-4 h-4 accent-brandRed"> <span>เพิ่มหมูกรอบ (+30฿)</span></label>
+                        <label class="flex items-center space-x-2 cursor-pointer"><input type="checkbox" onchange="updateCustomization('extraCheese', this.checked)" class="w-4 h-4 accent-brandRed"> <span>เพิ่มชีส (+20฿)</span></label>
+                        <label class="flex items-center space-x-2 cursor-pointer"><input type="checkbox" onchange="updateCustomization('lessSpice', this.checked)" class="w-4 h-4 accent-brandRed"> <span>ลดเผ็ด</span></label>
+                        <label class="flex items-center space-x-2 cursor-pointer"><input type="checkbox" onchange="updateCustomization('noVeg', this.checked)" class="w-4 h-4 accent-brandRed"> <span>ไม่ใส่ผัก</span></label>
+                    </div>
+                </div>
+
+                <!-- Allergen Info -->
+                <div class="text-xs font-bold text-gray-600">
+                    ⚠️ <span class="font-black">สารก่อภูมิแพ้:</span> ${product.allergen}
+                </div>
+
+                <button onclick="addCustomizedToCart()" class="w-full bg-brandRed text-white font-black text-xl py-4 comic-border shadow-comic hover:bg-red-600 transition-all">
+                    เพิ่มลงตะกร้าความอร่อย 🛒
+                </button>
+            `;
+
+            document.getElementById('product-modal').classList.remove('hidden');
+        }
+
+        function closeProductModal() {
+            document.getElementById('product-modal').classList.add('hidden');
+        }
+
+        function updateCustomization(key, val) {
+            selectedCustomizations[key] = val;
+            let basePrice = currentModalProduct.price;
+            if(selectedCustomizations.extraEgg) basePrice += 15;
+            if(selectedCustomizations.extraMeat) basePrice += 30;
+            if(selectedCustomizations.extraCheese) basePrice += 20;
+            document.getElementById('modal-price').innerText = `${basePrice} ฿`;
+        }
+
+        function addCustomizedToCart() {
+            if(!currentModalProduct) return;
+            let finalPrice = currentModalProduct.price;
+            let customTextArr = [];
+            if(selectedCustomizations.extraEgg) { finalPrice += 15; customTextArr.push("เพิ่มไข่"); }
+            if(selectedCustomizations.extraMeat) { finalPrice += 30; customTextArr.push("เพิ่มหมูกรอบ"); }
+            if(selectedCustomizations.extraCheese) { finalPrice += 20; customTextArr.push("เพิ่มชีส"); }
+            if(selectedCustomizations.lessSpice) customTextArr.push("ลดเผ็ด");
+            if(selectedCustomizations.noVeg) customTextArr.push("ไม่ใส่ผัก");
+
+            const cartItem = {
+                id: currentModalProduct.id + '-' + Date.now(),
+                name: currentModalProduct.name,
+                price: finalPrice,
+                image: currentModalProduct.image,
+                customizations: customTextArr.join(', ') || 'ปกติ',
+                quantity: 1
+            };
+
+            cart.push(cartItem);
+            updateCartUI();
+            closeProductModal();
+            showToast("💥 ตู้ม! เพิ่มเข้าตะกร้าแล้ว!");
+        }
+
+        function quickAddToCart(productId) {
+            const product = menuProducts.find(p => p.id === productId);
+            if(!product) return;
+            cart.push({
+                id: product.id + '-' + Date.now(),
+                name: product.name,
+                price: product.price,
+                image: product.image,
+                customizations: 'สูตรต้นตำรับ',
+                quantity: 1
+            });
+            updateCartUI();
+            showToast("💥 ตู้ม! เพิ่มเข้าตะกร้าแล้ว!");
+        }
+
+        function showToast(msg) {
+            const toast = document.createElement('div');
+            toast.className = 'fixed bottom-6 right-6 z-50 bg-brandDark text-brandYellow font-black text-lg px-6 py-3 comic-border shadow-comic-lg animate-bounce';
+            toast.innerText = msg;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 2500);
+        }
+
+        // Cart Drawer Management
+        function toggleCart() {
+            const drawer = document.getElementById('cart-drawer');
+            drawer.classList.toggle('hidden');
+        }
+
+        function updateCartUI() {
+            const badge = document.getElementById('cart-badge');
+            const container = document.getElementById('cart-items-container');
+            const subtotalEl = document.getElementById('cart-subtotal');
+            const totalEl = document.getElementById('cart-total');
+            const discountRow = document.getElementById('discount-row');
+            const discountEl = document.getElementById('cart-discount');
+
+            badge.innerText = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+            if(cart.length === 0) {
+                container.innerHTML = `<div class="text-center py-10 font-bold text-gray-500">ตะกร้าว่างเปล่า... หิวแล้วก็สั่งดิ! 💥</div>`;
+                subtotalEl.innerText = '0 บาท';
+                totalEl.innerText = '0 บาท';
+                discountRow.classList.add('hidden');
+                return;
+            }
+
+            container.innerHTML = cart.map((item, index) => `
+                <div class="bg-white comic-border p-4 flex items-center justify-between space-x-3 shadow-comic-sm">
+                    <img src="${item.image}" class="w-16 h-16 object-cover comic-border flex-shrink-0">
+                    <div class="flex-grow">
+                        <h4 class="font-black">${item.name}</h4>
+                        <div class="text-xs text-gray-500 font-bold">${item.customizations}</div>
+                        <div class="text-brandRed font-black text-sm mt-1">${item.price} ฿</div>
+                    </div>
+                    <div class="flex flex-col items-end space-y-2">
+                        <button onclick="removeFromCart(${index})" class="text-red-500 hover:text-red-700"><i class="fa-solid fa-trash"></i></button>
+                        <span class="font-bold text-sm">x${item.quantity}</span>
+                    </div>
+                </div>
+            `).join('');
+
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            subtotalEl.innerText = `${subtotal} บาท`;
+
+            let discountAmount = (subtotal * discountPercent) / 100;
+            if(discountPercent > 0) {
+                discountRow.classList.remove('hidden');
+                discountEl.innerText = `-${discountAmount} บาท (${discountPercent}%)`;
+            } else {
+                discountRow.classList.add('hidden');
+            }
+
+            const finalTotal = subtotal - discountAmount;
+            totalEl.innerText = `${finalTotal > 0 ? finalTotal : 0} บาท`;
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function applyCoupon() {
+            const code = document.getElementById('coupon-input').value.trim().toUpperCase();
+            const msgEl = document.getElementById('applied-coupon-msg');
+            if(code === 'HAEK5' || code === 'REWARD5') {
+                discountPercent = 5;
+                msgEl.innerText = '✅ ใช้คูปองส่วนลด 5% สำเร็จ!';
+                msgEl.classList.remove('hidden');
+                updateCartUI();
+            } else if(code === 'HAEK10' || code === 'REWARD10') {
+                discountPercent = 10;
+                msgEl.innerText = '✅ ใช้คูปองส่วนลด 10% สำเร็จ!';
+                msgEl.classList.remove('hidden');
+                updateCartUI();
+            } else if(code === 'HAEK20' || code === 'REWARD20') {
+                discountPercent = 20;
+                msgEl.innerText = '✅ ใช้คูปองส่วนลด 20% สำเร็จ!';
+                msgEl.classList.remove('hidden');
+                updateCartUI();
+            } else {
+                alert('รหัสคูปองไม่ถูกต้อง หรือหมดอายุแล้ว!');
+            }
+        }
+
+        function checkoutOrder() {
+            if(cart.length === 0) {
+                alert('ตะกร้าว่างเปล่า กรุณาเลือกเมนูก่อนสั่งซื้อ!');
+                return;
+            }
+            toggleCart();
+            document.getElementById('order-status-modal').classList.remove('hidden');
+            cart = [];
+            updateCartUI();
+        }
+
+        function closeOrderStatus() {
+            document.getElementById('order-status-modal').classList.add('hidden');
+            switchView('home');
+        }
+
+
+        // AI HAEK SUT FEATURE
+        function runAiHaekSut() {
+            const checkboxes = document.querySelectorAll('#fridge-ingredients input[type="checkbox"]:checked');
+            if(checkboxes.length === 0) {
+                alert('กรุณาเลือกวัตถุดิบในตู้เย็นอย่างน้อย 1 อย่างก่อนกดแหกสูตร!');
+                return;
+            }
+
+            const selected = Array.from(checkboxes).map(cb => cb.value);
+            const container = document.getElementById('ai-result-container');
+            const statusEl = document.getElementById('ai-status-text');
+            const contentEl = document.getElementById('ai-recipe-content');
+
+            container.classList.remove('hidden');
+            statusEl.innerText = "🔥 กำลังแหกสูตรโดย AI...";
+            contentEl.innerHTML = `<div class="col-span-full text-center py-10 font-black text-2xl animate-pulse">👨‍🍳 กำลังผสมผสานวัตถุดิบ ${selected.join(' + ')}...</div>`;
+
+            setTimeout(() => {
+                statusEl.innerText = "💥 สูตรเริ่มแตก! พร้อมเสิร์ฟความฟิน";
+                contentEl.innerHTML = `
+                    <div class="h-64 comic-border overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover">
+                    </div>
+                    <div class="space-y-4">
+                        <span class="bg-brandRed text-white font-black px-3 py-1 comic-border text-sm">🌟 AI CREATION SPEC</span>
+                        <h3 class="text-3xl font-black">“${selected[0]}ชีสระเบิดโคตรซิ่งวิงก์”</h3>
+                        <p class="font-bold text-gray-700">เกิดจากการรวมตัวอันบ้าคลั่งของ ${selected.join(', ')} ผัดด้วยไฟนรกแตกจนได้รสชาติที่คาดไม่ถึง!</p>
+                        <div class="bg-brandYellow comic-border p-3 font-bold text-sm space-y-1">
+                            <div>💵 ราคาประเมิน: 119 บาท</div>
+                            <div>🔥 Calories: 620 kcal | Protein: 29g</div>
+                            <div>🌶️ ระดับความเผ็ด: 4/5 (เผ็ดลิ้นหลุด)</div>
+                        </div>
+                        <div class="flex space-x-3">
+                            <button onclick="addAiRecipeToCart('${selected[0]}ชีสระเบิดโคตรซิ่ง', 119)" class="flex-grow bg-brandRed text-white font-black py-3 comic-border shadow-comic hover:bg-red-600">
+                                🔥 เอาเมนูนี้ลงตะกร้า
+                            </button>
+                            <button onclick="runAiHaekSut()" class="bg-brandDark text-brandYellow px-4 font-black comic-border shadow-comic">
+                                🔄 แหกใหม่
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }, 1500);
+        }
+
+        function addAiRecipeToCart(name, price) {
+            cart.push({
+                id: 'ai-' + Date.now(),
+                name: name,
+                price: price,
+                image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80',
+                customizations: 'AI Custom Creation',
+                quantity: 1
+            });
+            updateCartUI();
+            showToast("💥 ตู้ม! เพิ่มเมนู AI ลงตะกร้าแล้ว!");
+        }
+
+        // AI Recommendation Wizard
+        function runAiRecommendation() {
+            const budget = document.getElementById('rec-budget').value;
+            const type = document.getElementById('rec-type').value;
+            const mood = document.getElementById('rec-mood').value;
+
+            const resultsContainer = document.getElementById('ai-recommendation-results');
+            resultsContainer.classList.remove('hidden');
+
+            // Pick 3 random matching or top items
+            let recommended = [...menuProducts].sort(() => 0.5 - Math.random()).slice(0, 3);
+            resultsContainer.innerHTML = recommended.map(p => `
+                <div class="bg-white text-brandDark comic-border p-4 space-y-3 shadow-comic flex flex-col justify-between">
+                    <div>
+                        <img src="${p.image}" class="w-full h-36 object-cover comic-border mb-3">
+                        <h4 class="font-black text-xl">${p.name}</h4>
+                        <p class="text-xs font-bold text-gray-600 mt-1">${p.desc}</p>
+                    </div>
+                    <div class="pt-2 border-t flex items-center justify-between">
+                        <span class="font-black text-brandRed text-lg">${p.price} ฿</span>
+                        <button onclick="quickAddToCart(${p.id})" class="bg-brandRed text-white font-black px-3 py-1 text-sm comic-border shadow-comic-sm">เลือกเมนูนี้</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+
+        // ==========================================
+        // MINI GAME: "PLATE IT RIGHT!" LOGIC
+        // ==========================================
+        let gameState = {
+            level: 1,
+            score: 0,
+            timer: 30,
+            timerInterval: null,
+            combo: 0,
+            currentOrder: [],
+            placedItems: [],
+            requiredItems: []
+        };
+
+        const availableKitchenItems = [
+            { id: 'burger', name: 'Burger', icon: '🍔' },
+            { id: 'fries', name: 'French Fries', icon: '🍟' },
+            { id: 'salad', name: 'Salad', icon: '🥗' },
+            { id: 'pizza', name: 'Pizza', icon: '🍕' },
+            { id: 'chicken', name: 'Chicken', icon: '🍗' },
+            { id: 'cola', name: 'Cola', icon: '🥤' },
+            { id: 'cake', name: 'Cake', icon: '🍰' }
+        ];
+
+        function startGame() {
+            document.getElementById('game-start-screen').classList.add('hidden');
+            document.getElementById('game-over-screen').classList.add('hidden');
+            document.getElementById('game-play-screen').classList.remove('hidden');
+
+            gameState.level = 1;
+            gameState.score = 0;
+            gameState.combo = 0;
+            loadGameLevel();
+        }
+
+        function loadGameLevel() {
+            gameState.timer = 30;
+            gameState.placedItems = [];
+            document.getElementById('game-level').innerText = gameState.level;
+            document.getElementById('game-score').innerText = gameState.score;
+            document.getElementById('game-combo').innerText = `x${Math.max(1, gameState.combo)}`;
+
+            // Determine level requirements
+            if(gameState.level === 1) {
+                gameState.requiredItems = ['burger', 'fries', 'cola'];
+            } else if(gameState.level === 2) {
+                gameState.requiredItems = ['burger', 'fries', 'salad', 'cola'];
+            } else if(gameState.level === 3) {
+                gameState.requiredItems = ['pizza', 'chicken', 'salad', 'fries', 'cola'];
+            } else {
+                gameState.requiredItems = ['burger', 'pizza', 'chicken', 'salad', 'fries', 'cola'];
+            }
+
+            renderOrderDisplay();
+            renderKitchenTray();
+            renderPlateZone();
+
+            if(gameState.timerInterval) clearInterval(gameState.timerInterval);
+            gameState.timerInterval = setInterval(() => {
+                gameState.timer--;
+                document.getElementById('game-timer').innerText = gameState.timer;
+                if(gameState.timer <= 0) {
+                    clearInterval(gameState.timerInterval);
+                    endGame(false);
+                }
+            }, 1000);
+        }
+
+        function renderOrderDisplay() {
+            const display = document.getElementById('order-items-display');
+            display.innerHTML = gameState.requiredItems.map(itemId => {
+                const item = availableKitchenItems.find(i => i.id === itemId);
+                return `<span class="bg-white text-brandDark font-black px-3 py-1 comic-border shadow-comic-sm text-lg">${item.icon} ${item.name}</span>`;
+            }).join('');
+        }
+
+        function renderKitchenTray() {
+            const tray = document.getElementById('kitchen-items-tray');
+            tray.innerHTML = availableKitchenItems.map(item => `
+                <div draggable="true" ondragstart="drag(event)" onclick="clickPlaceItem('${item.id}')" data-id="${item.id}" class="bg-white comic-border p-3 text-center cursor-pointer hover:bg-brandYellow transition-all shadow-comic-sm flex flex-col items-center justify-center">
+                    <span class="text-3xl">${item.icon}</span>
+                    <span class="text-xs font-bold mt-1">${item.name}</span>
+                </div>
+            `).join('');
+        }
+
+        function renderPlateZone() {
+            const plate = document.getElementById('plate-drop-zone');
+            if(gameState.placedItems.length === 0) {
+                plate.innerHTML = `<span id="plate-placeholder-text" class="text-gray-400 font-bold text-center">ลากหรือคลิกวัตถุดิบมาวางที่นี่</span>`;
+                return;
+            }
+            plate.innerHTML = gameState.placedItems.map(itemId => {
+                const item = availableKitchenItems.find(i => i.id === itemId);
+                return `<div class="w-14 h-14 bg-brandYellow comic-border rounded-full flex items-center justify-center text-2xl shadow-comic-sm animate-bounce">${item.icon}</div>`;
+            }).join('');
+        }
+
+        // Drag and Drop handlers
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.getAttribute("data-id"));
+        }
+
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function dropItem(ev) {
+            ev.preventDefault();
+            const itemId = ev.dataTransfer.getData("text");
+            if(itemId) handleItemPlacement(itemId);
+        }
+
+        function clickPlaceItem(itemId) {
+            handleItemPlacement(itemId);
+        }
+
+        function handleItemPlacement(itemId) {
+            if(gameState.requiredItems.includes(itemId) && !gameState.placedItems.includes(itemId)) {
+                gameState.placedItems.push(itemId);
+                gameState.combo++;
+                gameState.score += 100 + (gameState.combo * 10);
+                document.getElementById('game-score').innerText = gameState.score;
+                document.getElementById('game-combo').innerText = `x${gameState.combo}`;
+                renderPlateZone();
+
+                // Check if level completed
+                if(gameState.placedItems.length === gameState.requiredItems.length) {
+                    clearInterval(gameState.timerInterval);
+                    gameState.score += 200 + (gameState.timer * 5); // Time bonus
+                    if(gameState.level < 5) {
+                        gameState.level++;
+                        showToast(`🎉 LEVEL COMPLETE! ไปต่อ Level ${gameState.level}`);
+                        setTimeout(loadGameLevel, 1200);
+                    } else {
+                        endGame(true);
+                    }
+                }
+            } else {
+                gameState.combo = 0;
+                gameState.score = Math.max(0, gameState.score - 30);
+                document.getElementById('game-score').innerText = gameState.score;
+                document.getElementById('game-combo').innerText = `x1`;
+                showToast("❌ ผิดตำแหน่ง! ลองใหม่ (-30 pts)");
+            }
+        }
+
+        function endGame(isWin) {
+            document.getElementById('game-play-screen').classList.add('hidden');
+            document.getElementById('game-over-screen').classList.remove('hidden');
+
+            document.getElementById('res-score').innerText = gameState.score;
+            document.getElementById('res-dishes').innerText = (gameState.level - 1) * 3 + gameState.placedItems.length;
+
+            let stars = "⭐⭐⭐ PERFECT CHEF";
+            if(gameState.score < 500) stars = "⭐ GOOD JOB";
+            else if(gameState.score < 1000) stars = "⭐⭐ GREAT CHEF";
+            document.getElementById('res-stars').innerText = stars;
+
+            // Unlock Rewards based on score
+            const rewardBox = document.getElementById('reward-unlock-box');
+            const rewardText = document.getElementById('reward-text');
+            if(gameState.score >= 500) {
+                rewardBox.classList.remove('hidden');
+                if(gameState.score >= 1500) {
+                    rewardText.innerText = "🎉 คุณทำได้ 1,500+ คะแนน! รับคูปองส่วนลด 20% (Code: HAEK20)";
+                } else if(gameState.score >= 1000) {
+                    rewardText.innerText = "🎉 คุณทำได้ 1,000+ คะแนน! รับคูปองส่วนลด 10% (Code: HAEK10)";
+                } else {
+                    rewardText.innerText = "🎉 คุณทำได้ 500+ คะแนน! รับคูปองส่วนลด 5% (Code: HAEK5)";
+                }
+            } else {
+                rewardBox.classList.add('hidden');
+            }
+        }
+
+        function claimReward() {
+            let code = 'HAEK5';
+            if(gameState.score >= 1500) code = 'HAEK20';
+            else if(gameState.score >= 1000) code = 'HAEK10';
+            
+            document.getElementById('coupon-input').value = code;
+            toggleCart();
+            applyCoupon();
+            switchView('menu');
+        }
+    </script>
+</body>
+</html>
